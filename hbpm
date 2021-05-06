@@ -1,12 +1,19 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
 import json,sys,urllib,os
+#TODO: Document code
+#TODO: Abstract into functions (Is "__name__ == '__main__'" a thing in python2?)
 #TODO: Add ability to specify other repos
 #TODO: Store repo in directory and sync with it occassionally (maybe we can use a directory in /root?)
 urllib.urlretrieve("https://repo.webosbrew.org/api/apps.json", "/tmp/repo.json")
 repo = json.load(open("/tmp/repo.json"))
 operation = sys.argv[1]
-if operation == "list":
+if operation == "help":
+    print "help: Prints this help message (Usage: `hbpm help`)"
+    print "list: Prints all available packages in the repo (Usage: `hbpm list`)"
+    print "install: Installs package from repo by ID (Usage: `hbpm install $ipkId`)"
+    print "remove: Removes installed application by ID (Usage: `hbpm remove $ipkId`)"
+elif operation == "list":
     for package in repo["packages"]:
         print package["title"] + " - " + package["id"]
 elif operation == "install":
