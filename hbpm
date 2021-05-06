@@ -1,0 +1,29 @@
+#!/usr/bin/python2
+# -*- coding: utf-8 -*-
+import json,sys,urllib,os
+#TODO: Add ability to specify other repos
+#TODO: Store repo in directory and sync with it occassionally (maybe we can use a directory in /root?)
+urllib.urlretrieve("https://repo.webosbrew.org/api/apps.json", "/tmp/repo.json")
+repo = json.load(open("/tmp/repo.json"))
+operation = sys.argv[1]
+if operation == "list":
+    for package in repo["packages"]:
+        print package["title"] + " - " + package["id"]
+elif operation == "install":
+    packageIdUser = sys.argv[2]
+    for package in repo["packages"]:
+        if package["id"] == packageIdUser:
+            print "Installing " + package["title"]
+            urllib.urlretrieve(package["manifestUrl"], "/tmp/manifest.json")
+            manifest = json.load(open("/tmp/manifest.json"))
+            version = manifest["version"]
+            ipkUrl = package["manifestUrl"].replace(package["manifestUrl"].split("/")[len(package["manifestUrl"].split("/"))-1], "") + manifest["ipkUrl"]
+            packageId = package["id"]
+            #Assemble call to appInstallService/dev/install (This is probably slightly out of order of how makes sense, but ¯\_(ツ)_/¯)
+            call = 'luna-send -n 1 -f luna://com.webos.appInstallService/dev/install \'{"id":"' + packageId + '","ipkUrl":"'+ "/tmp/app.ipk" + '","subscribe":true}\''
+            urllib.urlretrieve(ipkUrl, "/tmp/app.ipk")
+            os.system(call + "> /dev/null")
+            print "Installed " + package["title"] + "!"
+elif operation == "remove":
+    packageIdUser = sys.argv[2]
+    call = 'luna-send -n 1 -f luna://com.webos.appInstallService/dev/remove \'{"id":"' + packageIdUser + '","subscribe":true}\''
