@@ -24,6 +24,11 @@ elif operation == "install":
             urllib.urlretrieve(ipkUrl, "/tmp/app.ipk")
             os.system(call + "> /dev/null")
             print "Installed " + package["title"] + "!"
+elif operation == "install-ipk":
+    #args: hbpm install-ipk $ipkUrl $ipkId
+    #install local ipk instead of reading from repo
+    #TODO: make this an optional arg for normal install
+    call = 'luna-send -n 1 -f luna://com.webos.appInstallService/dev/install \'{"id":"' + sys.argv[3] + '","ipkUrl":"'+ sys.argv[2] + '","subscribe":true}\''
 elif operation == "remove":
     packageIdUser = sys.argv[2]
     call = 'luna-send -n 1 -f luna://com.webos.appInstallService/dev/remove \'{"id":"' + packageIdUser + '","subscribe":true}\''
