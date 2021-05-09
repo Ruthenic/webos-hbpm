@@ -48,4 +48,18 @@ elif operation == "cli":
     if operation == "list":
         for package in repo["packages"]:
             print package["title"]
+    elif operation == "install":
+        packageIdUser = sys.argv[3]
+        for package in repo["packages"]:
+            if package["title"] == packageIdUser:
+                print "Installing " + package["title"]
+                urllib.urlretrieve(package["manifestUrl"], "/tmp/manifest.json")
+                manifest = json.load(open("/tmp/manifest.json"))
+                version = manifest["version"]
+                ipkUrl = package["manifestUrl"].replace(package["manifestUrl"].split("/")[len(package["manifestUrl"].split("/"))-1], "") + manifest["ipkUrl"]
+                urllib.urlretrieve(ipkUrl, "/media/internal/bin/" + manifest["ipkUrl"])
+                os.system("chmod a+x /media/internal/bin/" + manifest["ipkUrl"])
+                print "Installed " + package["title"] + "!"
+    elif operation == "remove":
+        os.system("rm -rf /media/internal/bin/" + manifest["ipkUrl"])
         
