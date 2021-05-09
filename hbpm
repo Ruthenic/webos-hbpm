@@ -61,5 +61,4 @@ elif operation == "cli":
                 os.system("chmod a+x /media/internal/bin/" + manifest["ipkUrl"])
                 print "Installed " + package["title"] + "!"
     elif operation == "remove":
-        os.system("rm -rf /media/internal/bin/" + manifest["ipkUrl"])
-        
+        os.system("rm -rf /media/internal/bin/" + sys.argv[3])
