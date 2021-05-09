@@ -39,3 +39,13 @@ elif operation == "install-ipk":
 elif operation == "remove":
     packageIdUser = sys.argv[2]
     call = 'luna-send -n 1 -f luna://com.webos.appInstallService/dev/remove \'{"id":"' + packageIdUser + '","subscribe":true}\''
+    os.system(call + "> /dev/null")
+elif operation == "cli":
+    #Subset of commands for installing native/sh-based cli tools
+    operation = sys.argv[2]
+    urllib.urlretrieve("https://ruthenic.com/hbpm-cli-repo/apps.json", "/tmp/repo.json")
+    repo = json.load(open("/tmp/repo.json"))
+    if operation == "list":
+        for package in repo["packages"]:
+            print package["title"]
+        
