@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 		for (auto& element: manifest["packages"]) {
 			std::string tmp = element["title"];
 			tmp += "\n";
-			std::cout << tmp.c_str() << "\n";
+			std::cout << tmp;
 		}
 	} else if (strcmp("remove", argv[1]) == 0) {
 		for (auto& element: manifest["packages"]) {
