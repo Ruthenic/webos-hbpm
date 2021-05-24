@@ -22,7 +22,7 @@ tv:
 	scp hbpm root@${IP}:/media/internal/bin
 deps:
 	mkdir -p lib
-	cd lib && wget https://github.com/nlohmann/json/releases/download/v3.9.1/json.hpp && wget https://github.com/nothings/stb/raw/master/stb_ds.h
+	cd lib && wget https://github.com/nlohmann/json/releases/download/v3.9.1/json.hpp
 verbose:
 	${CXX} -v -o hbpm -Ilib -lcurl ${CXX_FLAGS} main.cpp
 clean:
