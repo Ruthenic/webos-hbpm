@@ -80,6 +80,12 @@ int main(int argc, char **argv) {
 				std::cout << "Not a match " << element["title"] << "\n";
 			}
 		}
+	} else if (strcmp("list", argv[1]) == 0) {
+		for (auto& element: manifest["packages"]) {
+			std::string tmp = element["title"];
+			tmp += "\n";
+			printf(tmp.c_str());
+		}
 	}
 	return 0;
 }
