@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
 		//printf("User wants to install %s\n", argv[2]);
 		//std::cout << manifest["packages"];
 		for (auto& element: manifest["packages"]) {
-			std::cout << element << "\n";
+			//std::cout << element << "\n";
 			std::string title = element["title"];
 			if (strcmp(title.c_str(), argv[2]) == 0) {
 				std::cout << "Installing " << element["title"] << "\n";	
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 				system((tmp2 + (packageLocation + tmp + ipkUrl)).c_str());
 				std::cout << "Installed " << element["title"] << "!\n";
 			} else {
-				std::cout << "Not a match " << element["title"] << "\n";
+				//std::cout << "Not a match " << element["title"] << "\n";
 			}
 		}
 	} else if (strcmp("list", argv[1]) == 0) {
