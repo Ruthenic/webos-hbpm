@@ -93,11 +93,12 @@ int main(int argc, char **argv) {
 		for (auto& element: manifest["packages"]) {
 			std::string title = element["title"];
 			if (strcmp(title.c_str(), argv[2]) == 0) {
-				std::cout << "Installing " << element["title"] << "\n";	
+				std::cout << "Removing " << element["title"] << "\n";	
 				json pkg_manifest = downloadFileAsJSON(element["manifestUrl"], "/tmp/pkg.manifest.json");
 				std::string ipkUrl = pkg_manifest["ipkUrl"];
 				std::string tmp = "/"; //i have no fucking idea why i have to do this but it works
 				remove((packageLocation + tmp + ipkUrl).c_str());
+				std::cout << "Removed " << element["title"] << "!";
 			}
 		}
 	}
