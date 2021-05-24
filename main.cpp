@@ -76,6 +76,9 @@ int main(int argc, char **argv) {
 				std::string tmp = "/"; //i have no fucking idea why i have to do this but it works
 				std::string packageUrl = manifestUrl.substr(0, manifestUrl.find_last_of("/")) + "/" + ipkUrl;
 				downloadFile(packageUrl, (packageLocation + tmp + ipkUrl).c_str());
+				std::string tmp2 = "chmod a+x ";
+				system((tmp2 + (packageLocation + tmp + ipkUrl)).c_str());
+				std::cout << "Installed " << element["title"] << "!\n";
 			} else {
 				std::cout << "Not a match " << element["title"] << "\n";
 			}
