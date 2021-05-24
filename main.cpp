@@ -59,11 +59,11 @@ json downloadFileAsJSON(std::string url, char filename[]) {
 
 int main(int argc, char **argv) {
 	json manifest = downloadFileAsJSON("https://www.ruthenic.com/hbpm-cli-repo/apps.json", "/tmp/repo.manifest.json");
-	//hardcoding this atm
+	//hardcoding this for webOS atm
 	std::string packageLocation = "/media/internal/bin";
 	//printf(argv[1]);
 	if (!strncmp(argv[1], "install", 7)) {
-		printf("User wants to install %s\n", argv[2]);
+		//printf("User wants to install %s\n", argv[2]);
 		//std::cout << manifest["packages"];
 		for (auto& element: manifest["packages"]) {
 			std::cout << element << "\n";
