@@ -100,6 +100,9 @@ int main(int argc, char **argv) {
 				std::cout << "Removed " << element["title"] << "!";
 			}
 		}
+	} else {
+		std::cout << "Command " << argv[1] << " not found!";
 	}
 	return 0;
 }
+
